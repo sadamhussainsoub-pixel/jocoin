@@ -14,7 +14,7 @@ import { useSession } from "@/hooks/use-session";
 import { useI18n } from "@/lib/i18n";
 
 type Mode = "signin" | "signup" | "forgot";
-type AuthSearch = { mode?: Mode; redirect?: string; ref?: string };
+type AuthSearch = { mode?: Mode | undefined; redirect?: string | undefined; ref?: string | undefined };
 
 function safeRedirect(r?: string) {
   return r && r.startsWith("/") && !r.startsWith("//") ? r : "/dashboard";
@@ -22,9 +22,9 @@ function safeRedirect(r?: string) {
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (s: Record<string, unknown>): AuthSearch => ({
-    mode: s.mode === "signup" || s.mode === "forgot" ? s.mode : undefined,
-    redirect: typeof s.redirect === "string" ? s.redirect : undefined,
-    ref: typeof s.ref === "string" ? s.ref.slice(0, 20) : undefined,
+    mode: s["mode"] === "signup" || s["mode"] === "forgot" ? s["mode"] : undefined,
+    redirect: typeof s["redirect"] === "string" ? s["redirect"] : undefined,
+    ref: typeof s["ref"] === "string" ? s["ref"].slice(0, 20) : undefined,
   }),
   head: () => ({
     meta: [

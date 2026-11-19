@@ -269,12 +269,12 @@ export const adminAuditQuery = (action: string) =>
 
 export const adminApi = {
   setUserStatus: (uid: string, status: "active" | "suspended", reason?: string) =>
-    adminCall(supabase.rpc("admin_set_user_status", { p_user: uid, p_status: status, p_reason: reason })),
+    adminCall(supabase.rpc("admin_set_user_status", { p_user: uid, p_status: status, ...(reason ? { p_reason: reason } : {}) })),
   setAdmin: (uid: string, grant: boolean) => adminCall(supabase.rpc("admin_set_admin", { p_user: uid, p_grant: grant })),
   updateSettings: (patch: Partial<Settings>) =>
     adminCall(supabase.rpc("admin_update_settings", { p: patch as never })),
   reviewWithdrawal: (id: string, approve: boolean, note?: string) =>
-    adminCall(supabase.rpc("admin_review_withdrawal", { p_id: id, p_approve: approve, p_note: note })),
+    adminCall(supabase.rpc("admin_review_withdrawal", { p_id: id, p_approve: approve, ...(note ? { p_note: note } : {}) })),
   saveAirdrop: (a: {
     id: string | null;
     title: string;

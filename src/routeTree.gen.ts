@@ -10,11 +10,37 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAirdropsRouteImport } from './routes/_authenticated/airdrops'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
+import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedReferralsRouteImport } from './routes/_authenticated/referrals'
+import { Route as AuthenticatedWalletRouteImport } from './routes/_authenticated/wallet'
+import { Route as AuthenticatedWithdrawRouteImport } from './routes/_authenticated/withdraw'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoadmapRoute = RoadmapRouteImport.update({
@@ -22,30 +48,154 @@ const RoadmapRoute = RoadmapRouteImport.update({
   path: '/roadmap',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAirdropsRoute = AuthenticatedAirdropsRouteImport.update({
+  id: '/airdrops',
+  path: '/airdrops',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHistoryRoute = AuthenticatedHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedLeaderboardRoute =
+  AuthenticatedLeaderboardRouteImport.update({
+    id: '/leaderboard',
+    path: '/leaderboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedReferralsRoute = AuthenticatedReferralsRouteImport.update({
+  id: '/referrals',
+  path: '/referrals',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedWalletRoute = AuthenticatedWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedWithdrawRoute = AuthenticatedWithdrawRouteImport.update({
+  id: '/withdraw',
+  path: '/withdraw',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/airdrops': typeof AuthenticatedAirdropsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/history': typeof AuthenticatedHistoryRoute
+  '/leaderboard': typeof AuthenticatedLeaderboardRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/referrals': typeof AuthenticatedReferralsRoute
+  '/wallet': typeof AuthenticatedWalletRoute
+  '/withdraw': typeof AuthenticatedWithdrawRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/airdrops': typeof AuthenticatedAirdropsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/history': typeof AuthenticatedHistoryRoute
+  '/leaderboard': typeof AuthenticatedLeaderboardRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/referrals': typeof AuthenticatedReferralsRoute
+  '/wallet': typeof AuthenticatedWalletRoute
+  '/withdraw': typeof AuthenticatedWithdrawRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/roadmap': typeof RoadmapRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/airdrops': typeof AuthenticatedAirdropsRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/history': typeof AuthenticatedHistoryRoute
+  '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/referrals': typeof AuthenticatedReferralsRoute
+  '/_authenticated/wallet': typeof AuthenticatedWalletRoute
+  '/_authenticated/withdraw': typeof AuthenticatedWithdrawRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/roadmap'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/roadmap'
+    | '/admin'
+    | '/airdrops'
+    | '/dashboard'
+    | '/history'
+    | '/leaderboard'
+    | '/profile'
+    | '/referrals'
+    | '/wallet'
+    | '/withdraw'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/roadmap'
-  id: '__root__' | '/' | '/roadmap'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/roadmap'
+    | '/admin'
+    | '/airdrops'
+    | '/dashboard'
+    | '/history'
+    | '/leaderboard'
+    | '/profile'
+    | '/referrals'
+    | '/wallet'
+    | '/withdraw'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/reset-password'
+    | '/roadmap'
+    | '/_authenticated/admin'
+    | '/_authenticated/airdrops'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/history'
+    | '/_authenticated/leaderboard'
+    | '/_authenticated/profile'
+    | '/_authenticated/referrals'
+    | '/_authenticated/wallet'
+    | '/_authenticated/withdraw'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   RoadmapRoute: typeof RoadmapRoute
 }
 
@@ -58,6 +208,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/roadmap': {
       id: '/roadmap'
       path: '/roadmap'
@@ -65,11 +236,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoadmapRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/airdrops': {
+      id: '/_authenticated/airdrops'
+      path: '/airdrops'
+      fullPath: '/airdrops'
+      preLoaderRoute: typeof AuthenticatedAirdropsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/history': {
+      id: '/_authenticated/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof AuthenticatedHistoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/leaderboard': {
+      id: '/_authenticated/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof AuthenticatedLeaderboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/referrals': {
+      id: '/_authenticated/referrals'
+      path: '/referrals'
+      fullPath: '/referrals'
+      preLoaderRoute: typeof AuthenticatedReferralsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/wallet': {
+      id: '/_authenticated/wallet'
+      path: '/wallet'
+      fullPath: '/wallet'
+      preLoaderRoute: typeof AuthenticatedWalletRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/withdraw': {
+      id: '/_authenticated/withdraw'
+      path: '/withdraw'
+      fullPath: '/withdraw'
+      preLoaderRoute: typeof AuthenticatedWithdrawRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedAirdropsRoute: typeof AuthenticatedAirdropsRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedHistoryRoute: typeof AuthenticatedHistoryRoute
+  AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedReferralsRoute: typeof AuthenticatedReferralsRoute
+  AuthenticatedWalletRoute: typeof AuthenticatedWalletRoute
+  AuthenticatedWithdrawRoute: typeof AuthenticatedWithdrawRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedAirdropsRoute: AuthenticatedAirdropsRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedHistoryRoute: AuthenticatedHistoryRoute,
+  AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedReferralsRoute: AuthenticatedReferralsRoute,
+  AuthenticatedWalletRoute: AuthenticatedWalletRoute,
+  AuthenticatedWithdrawRoute: AuthenticatedWithdrawRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   RoadmapRoute: RoadmapRoute,
 }
 export const routeTree = rootRouteImport
